@@ -1,0 +1,29 @@
+.page-view {
+  border: 1px solid black;
+  width: 800px;
+  height: 800px;
+  margin: 50px auto;
+}
+
+.character-view {
+  border: 1px solid red;
+  height: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.equipment-column {
+  border: 1px solid red;
+}
+
+.portrait {
+  border: 1px solid red;
+}
+
+.stats {
+  border: 1px solid red;
+}
+
+.equipment-cell {
+  border: 1px solid black;
+}
