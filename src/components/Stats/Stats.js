@@ -42,22 +42,9 @@ const Stats = () => {
       magicResist: characterBaseStats.magicResist + weapon.magicResist,
       speed: characterBaseStats.speed + weapon.speed
     },);
-    console.log(currentWeapon)
+    console.log(`Changed from ${currentWeapon.name} to ${weapon.name}`)
   };
 
-  const hammer = weapons[1];
-
-  const equipHammer = () => {
-    setCharacterStats({
-      // ...characterStats,
-      health: characterBaseStats.health + hammer.health,
-      attack: characterBaseStats.attack + hammer.attack,
-      defense: characterBaseStats.defense + hammer.defense,
-      magic: characterBaseStats.magic + hammer.magic,
-      magicResist: characterBaseStats.magicResist + hammer.magicResist,
-      speed: characterBaseStats.speed + hammer.speed
-    })
-  };
 
   return (
     <div className='stats-overview'>

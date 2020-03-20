@@ -1,6 +1,7 @@
 import React from 'react';
 import './mainView.scss'
 import Stats from "../components/Stats/Stats";
+import Equipment from "../components/equipment/Equipment";
 
 const MainView = () => {
 
@@ -14,9 +15,9 @@ const MainView = () => {
       </div>
       <div className='character-view'>
         <div className='equipment-column'>
-          <div className='equipment-cell'>Weapon</div>
-          <div className='equipment-cell'>Armor</div>
-          <div className='equipment-cell'>Boots</div>
+          <Equipment title='Weapon'/>
+          <Equipment title='Armor'/>
+          <Equipment title='Boots'/>
         </div>
         <div className='portrait-and-stats'>
           <div className='portrait'>Portrait</div>
@@ -25,9 +26,9 @@ const MainView = () => {
           </div>
         </div>
         <div className='equipment-column'>
-          <div className='equipment-cell'>Head</div>
-          <div className='equipment-cell'>Cape</div>
-          <div className='equipment-cell'>Orb</div>
+          <Equipment title='Head'/>
+          <Equipment title='Cape'/>
+          <Equipment title='Orb'/>
         </div>
       </div>
     </div>
