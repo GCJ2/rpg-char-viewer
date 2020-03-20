@@ -5,7 +5,7 @@ import Stats from "../components/Stats/Stats";
 const MainView = () => {
 
   const characterName = 'Dunkirk';
-  const currentClass = 'Warrior';
+  const currentClass = 'Defiler';
 
   return (
     <div className='page-view'>
