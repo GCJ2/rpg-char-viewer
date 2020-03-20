@@ -1,29 +1,43 @@
 .page-view {
   border: 1px solid black;
   width: 800px;
-  height: 800px;
+  height: 700px;
   margin: 50px auto;
 }
 
 .character-view {
   border: 1px solid red;
-  height: 90%;
+  height: 85%;
   display: flex;
   justify-content: space-between;
 }
 
 .equipment-column {
+  display: flex;
+  flex-direction: column;
   border: 1px solid red;
+  justify-content: space-between;
+  width: 20%;
+
+  .equipment-cell {
+    height: 33.33333%;
+    border: 1px solid black;
+  }
 }
 
-.portrait {
-  border: 1px solid red;
-}
-
-.stats {
-  border: 1px solid red;
-}
-
-.equipment-cell {
+.portrait-and-stats {
+  width: 75%;
   border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+
+  .portrait {
+    border: 1px solid blue;
+    height: 50%;
+  }
+
+  .stats {
+    border: 1px solid blue;
+    height: 50%;
+  }
 }
