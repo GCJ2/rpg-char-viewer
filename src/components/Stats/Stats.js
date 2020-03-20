@@ -3,7 +3,8 @@ import "./Stats.scss"
 
 const Stats = () => {
 
-  const [characterStats, setCharacterStats] = useState({
+
+  const [characterBaseStats, setCharacterBaseStats] = useState({
     health: 400,
     attack: 28,
     defense: 24,
@@ -11,52 +12,50 @@ const Stats = () => {
     magicResist: 7,
     speed: 14
   });
-
-  const [currentWeapon, setCurrentWeapon] = useState({});
+  const [characterStats, setCharacterStats] = useState(characterBaseStats);
 
   const weapons = [
     {
-      hammer: {
-        health: 140, attack: 15, defense: 2, magic: 1, magicResist: 2, speed: 1
-      }
+      name: 'Unarmed', health: 0, attack: 0, defense: 0, magic: 0, magicResist: 0, speed: 0
     },
     {
-      sword: {
-        health: 140, attack: 15, defense: 3, magic: 2, magicResist: 2, speed: 3
-      }
+      name: 'Hammer', health: 140, attack: 15, defense: 2, magic: 1, magicResist: 2, speed: 1
     },
     {
-      dagger: {
-        health: 80, attack: 9, defense: 1, magic: 2, magicResist: 2, speed: 6
-      }
+      name: 'Sword', health: 110, attack: 12, defense: 3, magic: 2, magicResist: 2, speed: 3
+    },
+    {
+      name: 'Dagger', health: 80, attack: 9, defense: 1, magic: 2, magicResist: 2, speed: 6
     },
   ];
 
-  const {hammer} = weapons[0];
-  console.log(hammer.health);
+  const [currentWeapon, setCurrentWeapon] = useState(weapons[0]);
 
 
-  // const equipWeapon = (weapon) => {
-  //   setCharacterStats({
-  //     ...characterStats,
-  //     health: characterStats.health + weapon.health,
-  //     attack: characterStats.attack + weapon.attack,
-  //     defense: characterStats.defense + weapon.defense,
-  //     magic: characterStats.magic + weapon.magic,
-  //     magicResist: characterStats.magicResist + weapon.magicResist,
-  //     speed: characterStats.speed + weapon.speed
-  //   })
-  // };
+  const equipWeapon2 = (weapon) => {
+    setCurrentWeapon(weapon);
+    setCharacterStats({
+      health: characterBaseStats.health + weapon.health,
+      attack: characterBaseStats.attack + weapon.attack,
+      defense: characterBaseStats.defense + weapon.defense,
+      magic: characterBaseStats.magic + weapon.magic,
+      magicResist: characterBaseStats.magicResist + weapon.magicResist,
+      speed: characterBaseStats.speed + weapon.speed
+    },);
+    console.log(currentWeapon)
+  };
+
+  const hammer = weapons[1];
 
   const equipHammer = () => {
     setCharacterStats({
-      ...characterStats,
-      health: characterStats.health + hammer.health,
-      attack: characterStats.attack + hammer.attack,
-      defense: characterStats.defense + hammer.defense,
-      magic: characterStats.magic + hammer.magic,
-      magicResist: characterStats.magicResist + hammer.magicResist,
-      speed: characterStats.speed + hammer.speed
+      // ...characterStats,
+      health: characterBaseStats.health + hammer.health,
+      attack: characterBaseStats.attack + hammer.attack,
+      defense: characterBaseStats.defense + hammer.defense,
+      magic: characterBaseStats.magic + hammer.magic,
+      magicResist: characterBaseStats.magicResist + hammer.magicResist,
+      speed: characterBaseStats.speed + hammer.speed
     })
   };
 
@@ -72,7 +71,8 @@ const Stats = () => {
         <p>Magic Resist: {characterStats.magicResist}</p>
         <p>Speed: {characterStats.speed}</p>
       </div>
-      <button onClick={equipHammer}>Equip Hammer</button>
+      <button onClick={() => equipWeapon2(weapons[1])}>Equip Hammer</button>
+      <button onClick={() => equipWeapon2(weapons[2])}>Equip Sword</button>
     </div>
   );
 };
