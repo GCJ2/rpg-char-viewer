@@ -3,8 +3,6 @@ import "./Equipment.scss"
 
 const Equipment = ({title, equipment}) => {
 
-  console.log(equipment);
-
   return (
     <div className='equipment-cell'>
       <p>{title}</p>

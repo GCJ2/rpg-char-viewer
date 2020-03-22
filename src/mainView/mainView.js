@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 import './mainView.scss'
 import Stats from "../components/Stats/Stats";
 import Equipment from "../components/equipment/Equipment";
-import { weapons, headGear, armor, boots, capes, orbs } from '../gear';
+import { weapons, headGear, armor, boots, capes, orbs, nothing } from '../gear';
 
 const MainView = () => {
 
-  console.log(weapons);
 
   const [characterBaseStats, setCharacterBaseStats] = useState({
     health: 400,
@@ -17,21 +16,30 @@ const MainView = () => {
     speed: 14
   });
   const [characterStats, setCharacterStats] = useState(characterBaseStats);
-  const [currentWeapon, setCurrentWeapon] = useState(weapons[0]);
-  const [currentHeadGear, setCurrentHeadGear] = useState(headGear[0]);
+  const [currentWeapon, setCurrentWeapon] = useState(nothing);
+  const [currentHeadGear, setCurrentHeadGear] = useState(nothing);
+  const [equippedGear, setEquippedGear] = useState([
+    nothing, nothing, nothing, nothing, nothing, nothing
+  ]);
+  const [bonuses, setBonuses] = useState({
+    health: 1, attack: 3, defense: 4,
+    magic: 1, magicResist: 2, speed: 5
+  });
 
-  const equipWeapon = (gear) => {
+  const equipGear = (gear) => {
     setCurrentWeapon(gear);
-    setCharacterStats({
-      health: characterBaseStats.health + gear.health,
-      attack: characterBaseStats.attack + gear.attack,
-      defense: characterBaseStats.defense + gear.defense,
-      magic: characterBaseStats.magic + gear.magic,
-      magicResist: characterBaseStats.magicResist + gear.magicResist,
-      speed: characterBaseStats.speed + gear.speed
-    },);
-    console.log(`Changed from ${currentWeapon.name} to ${gear.name}`)
+    console.log({currentWeapon});
+    setBonuses({
+      ...bonuses,
+      health: gear.health,
+      attack: gear.attack,
+      defense: gear.defense,
+      magic: gear.magic,
+      magicResist: gear.magicResist,
+      speed: gear.speed,
+      })
   };
+
 
   const equipHead = (gear) => {
     setCurrentHeadGear(gear);
@@ -58,26 +66,25 @@ const MainView = () => {
       <div className='character-view'>
         <div className='equipment-column'>
           <Equipment title='Weapon' equipment={currentWeapon}/>
-          <Equipment title='Armor' equipment={currentWeapon}/>
-          <Equipment title='Boots' equipment={currentWeapon}/>
+          <Equipment title='Armor' equipment={equippedGear[1]}/>
+          <Equipment title='Boots' equipment={equippedGear[2]}/>
         </div>
         <div className='portrait-and-stats'>
           <div className='portrait'>Portrait</div>
           <div className='stats'>
             <Stats characterStats={characterStats}
-                   weapon={currentWeapon}/>
+                   bonuses={bonuses}/>
           </div>
         </div>
         <div className='equipment-column'>
-          <Equipment title='HeadGear' equipment={currentHeadGear}/>
-          <Equipment title='Cape' equipment={currentWeapon}/>
-          <Equipment title='Orb' equipment={currentWeapon}/>
+          <Equipment title='HeadGear' equipment={equippedGear[3]}/>
+          <Equipment title='Cape' equipment={equippedGear[4]}/>
+          <Equipment title='Orb' equipment={equippedGear[5]}/>
         </div>
       </div>
-      <button onClick={() => equipWeapon(weapons[1])}>Equip Hammer</button>
-      <button onClick={() => equipWeapon(weapons[2])}>Equip Sword</button>
-      <button onClick={() => equipHead(headGear[0])}>Equip Hat</button>
-      <button onClick={() => equipHead(headGear[1])}>Equip Helmet</button>
+      <button onClick={() => equipGear(weapons[0])}>Equip Hammer</button>
+      <button onClick={() => equipGear(weapons[1])}>Equip Sword</button>
+      <button onClick={() => equipGear(nothing)}>Unequip Weapon</button>
     </div>
   );
 };
