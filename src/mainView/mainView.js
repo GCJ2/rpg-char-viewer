@@ -69,7 +69,7 @@ const MainView = () => {
           </div>
         </div>
         <div className='equipment-column'>
-          <Equipment title='Head' equipment={currentHeadGear}/>
+          <Equipment title='HeadGear' equipment={currentHeadGear}/>
           <Equipment title='Cape' equipment={currentWeapon}/>
           <Equipment title='Orb' equipment={currentWeapon}/>
         </div>

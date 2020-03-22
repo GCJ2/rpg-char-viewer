@@ -1,7 +1,7 @@
 const weapons =
   [
     {
-      name: 'Unarmed', health: 0, attack: 0, defense: 0, magic: 0, magicResist: 0, speed: 0
+      name: 'Unequipped', health: 0, attack: 0, defense: 0, magic: 0, magicResist: 0, speed: 0
     },
     {
       name: 'Hammer', health: 140, attack: 15, defense: 2, magic: 1, magicResist: 2, speed: 1
@@ -34,10 +34,10 @@ const armor = [
 
 const boots = [
   {
-    name: 'Leather', health: 20, attack: 0, defense: 6, magic: 0, magicResist: 8, speed: 0
+    name: 'Leather', health: 20, attack: 0, defense: 6, magic: 0, magicResist: 8, speed: 6
   },
   {
-    name: 'Plate', health: 30, attack: 0, defense: 10, magic: 1, magicResist: 4, speed: 0
+    name: 'Plate', health: 30, attack: 0, defense: 10, magic: 1, magicResist: 4, speed: 2
   },
 ];
 
