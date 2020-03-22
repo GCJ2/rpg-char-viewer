@@ -16,11 +16,11 @@ const MainView = () => {
     speed: 14
   });
   const [characterStats, setCharacterStats] = useState(characterBaseStats);
-  const [currentWeapon, setCurrentWeapon] = useState(nothing);
-  const [currentHeadGear, setCurrentHeadGear] = useState(nothing);
   const [equippedGear, setEquippedGear] = useState([
     nothing, nothing, nothing, nothing, nothing, nothing
   ]);
+  const [currentWeapon, setCurrentWeapon] = useState(equippedGear[0]);
+  const [currentHeadGear, setCurrentHeadGear] = useState(nothing);
   const [bonuses, setBonuses] = useState({
     health: 1, attack: 3, defense: 4,
     magic: 1, magicResist: 2, speed: 5
@@ -37,7 +37,19 @@ const MainView = () => {
       magic: gear.magic,
       magicResist: gear.magicResist,
       speed: gear.speed,
-      })
+      });
+    updateStats();
+  };
+
+  const updateStats = () => {
+    setCharacterStats({
+      health: bonuses.health + characterBaseStats.health,
+      attack: bonuses.attack + characterBaseStats.attack,
+      defense: bonuses.defense + characterBaseStats.defense,
+      magic: bonuses.magic + characterBaseStats.magic,
+      magicResist: bonuses.magicResist + characterBaseStats.magicResist,
+      speed: bonuses.speed + characterBaseStats.speed
+    })
   };
 
 
