@@ -20,14 +20,30 @@ const MainView = () => {
     magic: 1, magicResist: 2, speed: 5
   });
   const [bonuses, setBonuses] = useState(baseBonuses);
-  const equippedGear = [
-    weapons[0], armor[0], boots[0], headGear[0], capes[0], orbs[0]
-  ];
-  const [currentWeapon, setCurrentWeapon] = useState(weapons[0]);
+  // const equippedGear = [
+  //   weapons[0], armor[0], boots[0], headGear[0], capes[0], orbs[0]
+  // ];
+  const [equippedGear, setEquippedGear] = useState({
+    weapon: weapons[1], armor: armor[1], boots: boots[1], headGear: headGear[1], cape: capes[1], orb: orbs[1]
+  });
+  const [currentWeapon, setCurrentWeapon] = useState(equippedGear.weapon);
+  const [currentArmor, setCurrentArmor] = useState(equippedGear.armor);
 
-  const applyBonus = () => {
+  // const weaponBonus = () => {
+  //   setBonuses({
+  //       health: baseBonuses.health + currentWeapon.health,
+  //       attack: baseBonuses.attack + currentWeapon.attack,
+  //       defense: baseBonuses.defense + currentWeapon.defense,
+  //       magic: baseBonuses.magic + currentWeapon.magic,
+  //       magicResist: baseBonuses.magicResist + currentWeapon.magicResist,
+  //       speed: baseBonuses.speed + currentWeapon.speed,
+  //     }
+  //   )
+  // };
+
+  const weaponBonus = () => {
     setBonuses({
-        health: baseBonuses.health + currentWeapon.health,
+        health: baseBonuses.health + equippedGear.weapon.health,
         attack: baseBonuses.attack + currentWeapon.attack,
         defense: baseBonuses.defense + currentWeapon.defense,
         magic: baseBonuses.magic + currentWeapon.magic,
@@ -37,7 +53,7 @@ const MainView = () => {
     )
   };
 
-  const weaponBonus = () => {
+  const applyBonus = () => {
     setCharacterStats({
       health: bonuses.health + characterBaseStats.health,
       attack: bonuses.attack + characterBaseStats.attack,
@@ -48,21 +64,20 @@ const MainView = () => {
     })
   };
 
-  const equipWeapon = (i, e) => {
+  const equipWeapon = (e, i) => {
     e.preventDefault();
-    equippedGear.splice(0, 1, weapons[i]);
-    setCurrentWeapon(equippedGear[0]);
+    setEquippedGear({...equippedGear, weapon: weapons[i]});
   };
 
   useEffect(() => {
-    if (currentWeapon) {
-      applyBonus();
+    if (equippedGear) {
+      weaponBonus();
     }
-  }, [currentWeapon]);
+  }, [equippedGear]);
 
   useEffect(() => {
     if (bonuses) {
-      weaponBonus();
+      applyBonus();
     }
   }, [bonuses]);
 
@@ -87,9 +102,9 @@ const MainView = () => {
       </div>
       <div className='character-view'>
         <div className='equipment-column'>
-          <Equipment title='Weapon' equipment={currentWeapon}/>
-          <Equipment title='Armor' equipment={equippedGear[1]}/>
-          <Equipment title='Boots' equipment={equippedGear[2]}/>
+          <Equipment title='Weapon' equipment={equippedGear.weapon}/>
+          <Equipment title='Armor' equipment={equippedGear.armor}/>
+          <Equipment title='Boots' equipment={equippedGear.boots}/>
         </div>
         <div className='portrait-and-stats'>
           <div className='portrait'>Portrait</div>
@@ -99,14 +114,14 @@ const MainView = () => {
           </div>
         </div>
         <div className='equipment-column'>
-          <Equipment title='HeadGear' equipment={equippedGear[3]}/>
-          <Equipment title='Cape' equipment={equippedGear[4]}/>
-          <Equipment title='Orb' equipment={equippedGear[5]}/>
+          <Equipment title='HeadGear' equipment={equippedGear.headGear}/>
+          <Equipment title='Cape' equipment={equippedGear.cape}/>
+          <Equipment title='Orb' equipment={equippedGear.orb}/>
         </div>
       </div>
-      <button onClick={(e) => equipWeapon(0, e)}>Equip Nothing</button>
-      <button onClick={(e) => equipWeapon(1, e)}>Equip Hammer</button>
-      <button onClick={(e) => equipWeapon(2, e)}>Equip Sword</button>
+      <button onClick={(e) => equipWeapon(e, 0)}>Equip Nothing</button>
+      <button onClick={(e) => equipWeapon(e, 1)}>Equip Hammer</button>
+      <button onClick={(e) => equipWeapon(e, 2)}>Equip Sword</button>
     </div>
   );
 };
