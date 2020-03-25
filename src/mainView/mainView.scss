@@ -6,27 +6,28 @@
 }
 
 .character-view {
-  border: 1px solid red;
-  height: 85%;
+  //border: 1px solid red;
+  height: 647px;
   display: flex;
   justify-content: space-between;
 }
 
+.character-name {
+  border-bottom: 1px solid black;
+}
 
 
 .portrait-and-stats {
   width: 75%;
-  border: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   display: flex;
   flex-direction: column;
 
-  .portrait {
-    border: 1px solid blue;
-    height: 50%;
-  }
+
 
   .stats {
-    border: 1px solid blue;
+    //border: 1px solid blue;
     height: 50%;
   }
 }

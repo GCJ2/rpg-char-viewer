@@ -1,13 +1,13 @@
 .equipment-column {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  //border: 1px solid red;
   justify-content: space-between;
   width: 20%;
 
   .equipment-cell {
     height: 33.33333%;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 
     p {
       margin: 2.5px 0;
@@ -17,7 +17,7 @@
 
 .dropdown {
   position: relative;
-  border-bottom: 1px solid blue;
+  //border-bottom: 1px solid blue;
 }
 
 .dropdown-content {
@@ -27,6 +27,7 @@
   z-index: 1;
   width: 100%;
   text-align: center;
+  border-bottom: 1px solid black;
 
   ul {
     color: black;
@@ -37,7 +38,7 @@
   }
 }
 
-.dropdown:hover {
+.equipment-cell:hover {
   .dropdown-content {
     display: block;
   }

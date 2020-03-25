@@ -10,18 +10,20 @@ const Equipment = ({title, equipment, equipGear, gear}) => {
         <div className='dropdown-content'>
           {gear.map((gear, i) => (
             <ul key={gear.name + i}
-                onClick={() => equipGear(gear.id)} >
+                onClick={() => equipGear(gear.id)}>
               {gear.name}</ul>
           ))}
         </div>
       </div>
-      <p>{equipment.name}</p>
-      <p>HP: {equipment.health}</p>
-      <p>ATK: {equipment.attack}</p>
-      <p>DEF: {equipment.defense}</p>
-      <p>MAG: {equipment.magic}</p>
-      <p>MDEF: {equipment.magicResist}</p>
-      <p>SPD: {equipment.speed}</p>
+      <div className='char-stats'>
+        <p>{equipment.name}</p>
+        <p>HP: {equipment.health}</p>
+        <p>ATK: {equipment.attack}</p>
+        <p>DEF: {equipment.defense}</p>
+        <p>MAG: {equipment.magic}</p>
+        <p>MDEF: {equipment.magicResist}</p>
+        <p>SPD: {equipment.speed}</p>
+      </div>
     </div>
   );
 };

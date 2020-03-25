@@ -3,6 +3,7 @@ import './mainView.scss'
 import Stats from "../components/Stats/Stats";
 import Equipment from "../components/equipment/Equipment";
 import {weapons, headGear, armor, boots, capes, orbs} from '../gear';
+import Portrait from "../components/Portrait/Portrait";
 
 const MainView = () => {
 
@@ -119,7 +120,7 @@ const MainView = () => {
                      gear={boots}/>
         </div>
         <div className='portrait-and-stats'>
-          <div className='portrait'>Portrait</div>
+          <Portrait/>
           <div className='stats'>
             <Stats characterStats={characterStats}
                    bonuses={renderedBonuses}/>
@@ -137,9 +138,6 @@ const MainView = () => {
                      gear={orbs}/>
         </div>
       </div>
-      <button onClick={() => equipWeapon(0)}>Equip Nothing</button>
-      <button onClick={() => equipWeapon(1)}>Equip Hammer</button>
-      <button onClick={() => equipWeapon(2)}>Equip Sword</button>
     </div>
   );
 };
