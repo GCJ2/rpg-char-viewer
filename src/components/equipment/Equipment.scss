@@ -14,3 +14,31 @@
     }
   }
 }
+
+.dropdown {
+  position: relative;
+  border-bottom: 1px solid blue;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+
+  ul {
+    color: black;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    padding: 0;
+  }
+}
+
+.dropdown:hover {
+  .dropdown-content {
+    display: block;
+  }
+}

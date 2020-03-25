@@ -21,20 +21,8 @@ const MainView = () => {
   });
   const [bonuses, setBonuses] = useState(baseBonuses);
   const [equippedGear, setEquippedGear] = useState({
-    weapon: weapons[1], armor: armor[1], boots: boots[1], headGear: headGear[1], cape: capes[1], orb: orbs[1]
+    weapon: weapons[0], armor: armor[0], boots: boots[0], headGear: headGear[0], cape: capes[0], orb: orbs[0]
   });
-
-  const weaponBonus = () => {
-    setBonuses({
-        health: baseBonuses.health + equippedGear.weapon.health,
-        attack: baseBonuses.attack + equippedGear.weapon.attack,
-        defense: baseBonuses.defense + equippedGear.weapon.defense,
-        magic: baseBonuses.magic + equippedGear.weapon.magic,
-        magicResist: baseBonuses.magicResist + equippedGear.weapon.magicResist,
-        speed: baseBonuses.speed + equippedGear.weapon.speed,
-      }
-    )
-  };
 
   const healthBonus =
     equippedGear.weapon.health + equippedGear.armor.health + equippedGear.boots.health +
@@ -65,46 +53,50 @@ const MainView = () => {
     magic: magicBonus, magicResist: magicResistBonus, speed: speedBonus
   };
 
-  const renderedBonus = () => {
+  const renderedStat = () => {
     setCharacterStats({
-      health: bonuses.health + characterBaseStats.health,
-      attack: bonuses.attack + characterBaseStats.attack,
-      defense: bonuses.defense + characterBaseStats.defense,
-      magic: bonuses.magic + characterBaseStats.magic,
-      magicResist: bonuses.magicResist + characterBaseStats.magicResist,
-      speed: bonuses.speed + characterBaseStats.speed
+      health: bonuses.health + gearBonuses.health + characterBaseStats.health,
+      attack: bonuses.attack + gearBonuses.attack + characterBaseStats.attack,
+      defense: bonuses.defense + gearBonuses.defense + characterBaseStats.defense,
+      magic: bonuses.magic + gearBonuses.magic + characterBaseStats.magic,
+      magicResist: bonuses.magicResist + gearBonuses.magicResist + characterBaseStats.magicResist,
+      speed: bonuses.speed + gearBonuses.speed + characterBaseStats.speed
     })
   };
 
-  const equipWeapon = (e, i) => {
-    e.preventDefault();
+  const renderedBonuses = {
+    health: healthBonus + baseBonuses.health,
+    attack: attackBonus + baseBonuses.attack,
+    defense: defenseBonus + baseBonuses.defense,
+    magic: magicBonus + baseBonuses.magic,
+    magicResist: magicResistBonus + baseBonuses.magicResist,
+    speed: speedBonus + baseBonuses.speed
+  };
+
+  const equipWeapon = (i) => {
     setEquippedGear({...equippedGear, weapon: weapons[i]});
+  };
+  const equipArmor = (i) => {
+    setEquippedGear({...equippedGear, armor: armor[i]});
+  };
+  const equipBoots = (i) => {
+    setEquippedGear({...equippedGear, boots: boots[i]});
+  };
+  const equipHeadGear = (i) => {
+    setEquippedGear({...equippedGear, headGear: headGear[i]});
+  };
+  const equipCape = (i) => {
+    setEquippedGear({...equippedGear, cape: capes[i]});
+  };
+  const equipOrb = (i) => {
+    setEquippedGear({...equippedGear, orb: orbs[i]});
   };
 
   useEffect(() => {
     if (equippedGear) {
-      weaponBonus();
-      console.log(gearBonuses)
+      renderedStat();
     }
   }, [equippedGear]);
-
-  useEffect(() => {
-    if (bonuses) {
-      renderedBonus();
-
-    }
-  }, [bonuses]);
-
-  const updateStats = () => {
-    setCharacterStats({
-      health: bonuses.health + characterBaseStats.health,
-      attack: bonuses.attack + characterBaseStats.attack,
-      defense: bonuses.defense + characterBaseStats.defense,
-      magic: bonuses.magic + characterBaseStats.magic,
-      magicResist: bonuses.magicResist + characterBaseStats.magicResist,
-      speed: bonuses.speed + characterBaseStats.speed
-    })
-  };
 
   const characterName = 'Dunkirk';
   const currentClass = 'Defiler';
@@ -116,26 +108,38 @@ const MainView = () => {
       </div>
       <div className='character-view'>
         <div className='equipment-column'>
-          <Equipment title='Weapon' equipment={equippedGear.weapon}/>
-          <Equipment title='Armor' equipment={equippedGear.armor}/>
-          <Equipment title='Boots' equipment={equippedGear.boots}/>
+          <Equipment title='Weapon' equipment={equippedGear.weapon}
+                     equipGear={equipWeapon}
+                     gear={weapons}/>
+          <Equipment title='Armor' equipment={equippedGear.armor}
+                     equipGear={equipArmor}
+                     gear={armor}/>
+          <Equipment title='Boots' equipment={equippedGear.boots}
+                     equipGear={equipBoots}
+                     gear={boots}/>
         </div>
         <div className='portrait-and-stats'>
           <div className='portrait'>Portrait</div>
           <div className='stats'>
             <Stats characterStats={characterStats}
-                   bonuses={bonuses}/>
+                   bonuses={renderedBonuses}/>
           </div>
         </div>
         <div className='equipment-column'>
-          <Equipment title='HeadGear' equipment={equippedGear.headGear}/>
-          <Equipment title='Cape' equipment={equippedGear.cape}/>
-          <Equipment title='Orb' equipment={equippedGear.orb}/>
+          <Equipment title='Headgear' equipment={equippedGear.headGear}
+                     equipGear={equipHeadGear}
+                     gear={headGear}/>
+          <Equipment title='Cape' equipment={equippedGear.cape}
+                     equipGear={equipCape}
+                     gear={capes}/>
+          <Equipment title='Orb' equipment={equippedGear.orb}
+                     equipGear={equipOrb}
+                     gear={orbs}/>
         </div>
       </div>
-      <button onClick={(e) => equipWeapon(e, 0)}>Equip Nothing</button>
-      <button onClick={(e) => equipWeapon(e, 1)}>Equip Hammer</button>
-      <button onClick={(e) => equipWeapon(e, 2)}>Equip Sword</button>
+      <button onClick={() => equipWeapon(0)}>Equip Nothing</button>
+      <button onClick={() => equipWeapon(1)}>Equip Hammer</button>
+      <button onClick={() => equipWeapon(2)}>Equip Sword</button>
     </div>
   );
 };

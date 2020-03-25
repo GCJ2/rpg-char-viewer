@@ -1,11 +1,20 @@
 import React from 'react';
 import "./Equipment.scss"
 
-const Equipment = ({title, equipment}) => {
+const Equipment = ({title, equipment, equipGear, gear}) => {
 
   return (
     <div className='equipment-cell'>
-      <p>{title}</p>
+      <div className='dropdown'>
+        <p className='dropdown-p'>{title}</p>
+        <div className='dropdown-content'>
+          {gear.map((gear, i) => (
+            <ul key={gear.name + i}
+                onClick={() => equipGear(gear.id)} >
+              {gear.name}</ul>
+          ))}
+        </div>
+      </div>
       <p>{equipment.name}</p>
       <p>HP: {equipment.health}</p>
       <p>ATK: {equipment.attack}</p>
