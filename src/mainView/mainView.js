@@ -1,67 +1,65 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './mainView.scss'
 import Stats from "../components/Stats/Stats";
 import Equipment from "../components/equipment/Equipment";
-import {weapons, headGear, armor, boots, capes, orbs} from '../gear';
+import {armor, boots, capes, headGear, orbs, weapons} from '../gear';
 import Portrait from "../components/Portrait/Portrait";
 
 const MainView = () => {
 
-  const [characterBaseStats, setCharacterBaseStats] = useState({
+  const characterBaseStats = {
     health: 400,
     attack: 28,
     defense: 24,
     magic: 6,
     magicResist: 7,
     speed: 14
-  });
+  };
+
   const [characterStats, setCharacterStats] = useState(characterBaseStats);
-  const [baseBonuses, setBaseBonuses] = useState({
+  const baseBonuses = {
     health: 1, attack: 3, defense: 4,
     magic: 1, magicResist: 2, speed: 5
-  });
-  const [bonuses, setBonuses] = useState(baseBonuses);
+  };
+  const bonuses = baseBonuses;
   const [equippedGear, setEquippedGear] = useState({
     weapon: weapons[0], armor: armor[0], boots: boots[0], headGear: headGear[0], cape: capes[0], orb: orbs[0]
   });
 
-  const healthBonus =
-    equippedGear.weapon.health + equippedGear.armor.health + equippedGear.boots.health +
-    equippedGear.headGear.health + equippedGear.cape.health + equippedGear.orb.health;
+  const getBonus = (stat) => {
+    return(
+    equippedGear.weapon[stat] + equippedGear.armor[stat] + equippedGear.boots[stat] +
+    equippedGear.headGear[stat] + equippedGear.cape[stat] + equippedGear.orb[stat]
+    );
+  };
 
-  const attackBonus =
-    equippedGear.weapon.attack + equippedGear.armor.attack + equippedGear.boots.attack +
-    equippedGear.headGear.attack + equippedGear.cape.attack + equippedGear.orb.attack;
+  const healthBonus = getBonus('health');
+  const attackBonus = getBonus('attack');
+  const defenseBonus = getBonus('defense');
+  const magicBonus = getBonus('magic');
+  const magicResistBonus = getBonus('magicResist');
+  const speedBonus = getBonus('speed');
 
-  const defenseBonus =
-    equippedGear.weapon.defense + equippedGear.armor.defense + equippedGear.boots.defense +
-    equippedGear.headGear.defense + equippedGear.cape.defense + equippedGear.orb.defense;
-
-  const magicBonus =
-    equippedGear.weapon.magic + equippedGear.armor.magic + equippedGear.boots.magic +
-    equippedGear.headGear.magic + equippedGear.cape.magic + equippedGear.orb.magic;
-
-  const magicResistBonus =
-    equippedGear.weapon.magicResist + equippedGear.armor.magicResist + equippedGear.boots.magicResist +
-    equippedGear.headGear.magicResist + equippedGear.cape.magicResist + equippedGear.orb.magicResist;
-
-  const speedBonus =
-    equippedGear.weapon.speed + equippedGear.armor.speed + equippedGear.boots.speed +
-    equippedGear.headGear.speed + equippedGear.cape.speed + equippedGear.orb.speed;
 
   const gearBonuses = {
     health: healthBonus, attack: attackBonus, defense: defenseBonus,
     magic: magicBonus, magicResist: magicResistBonus, speed: speedBonus
   };
 
+  const getStatsForRender = (stat) => {
+    return (
+      bonuses[stat] + gearBonuses[stat] + characterBaseStats[stat]
+    );
+  };
+
   const renderedStat = () => {
     setCharacterStats({
-      health: bonuses.health + gearBonuses.health + characterBaseStats.health,
-      attack: bonuses.attack + gearBonuses.attack + characterBaseStats.attack,
-      defense: bonuses.defense + gearBonuses.defense + characterBaseStats.defense,
-      magic: bonuses.magic + gearBonuses.magic + characterBaseStats.magic,
-      magicResist: bonuses.magicResist + gearBonuses.magicResist + characterBaseStats.magicResist,
-      speed: bonuses.speed + gearBonuses.speed + characterBaseStats.speed
+      health: getStatsForRender('health'),
+      attack: getStatsForRender('attack'),
+      defense: getStatsForRender('defense'),
+      magic: getStatsForRender('magic'),
+      magicResist: getStatsForRender('magicResist'),
+      speed: getStatsForRender('speed')
     })
   };
 

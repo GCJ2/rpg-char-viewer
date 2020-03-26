@@ -16,7 +16,7 @@ const Equipment = ({title, equipment, equipGear, gear}) => {
         </div>
       </div>
       <div className='char-stats'>
-        <p>{equipment.name}</p>
+        <p className='equip-name'>{equipment.name}</p>
         <p>HP: {equipment.health}</p>
         <p>ATK: {equipment.attack}</p>
         <p>DEF: {equipment.defense}</p>
