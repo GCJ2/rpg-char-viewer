@@ -1,4 +1,4 @@
-const weapons =
+const weapon =
   [
     {
       name: 'Nothing', id: 0, type: 'weapon', health: 0, attack: 0, defense: 0, magic: 0, magicResist: 0, speed: 0
@@ -76,7 +76,7 @@ const orbs = [
 
 
 export {
-  weapons,
+  weapon,
   headGear,
   armor,
   boots,

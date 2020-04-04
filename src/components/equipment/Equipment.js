@@ -3,6 +3,7 @@ import "./Equipment.scss"
 
 const Equipment = ({title, equipment, equipGear, gear}) => {
 
+
   return (
     <div className='equipment-cell'>
       <div className='dropdown'>

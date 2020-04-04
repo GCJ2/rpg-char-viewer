@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './mainView.scss'
 import Stats from "../components/Stats/Stats";
 import Equipment from "../components/equipment/Equipment";
-import {armor, boots, capes, headGear, orbs, weapons} from '../gear';
+import {armor, boots, capes, headGear, orbs, weapon} from '../gear';
 import Portrait from "../components/Portrait/Portrait";
 
 const MainView = () => {
@@ -15,7 +15,6 @@ const MainView = () => {
     magicResist: 7,
     speed: 14
   };
-
   const [characterStats, setCharacterStats] = useState(characterBaseStats);
   const baseBonuses = {
     health: 1, attack: 3, defense: 4,
@@ -23,7 +22,7 @@ const MainView = () => {
   };
   const bonuses = baseBonuses;
   const [equippedGear, setEquippedGear] = useState({
-    weapon: weapons[0], armor: armor[0], boots: boots[0], headGear: headGear[0], cape: capes[0], orb: orbs[0]
+    weapon: weapon[0], armor: armor[0], boots: boots[0], headGear: headGear[0], cape: capes[0], orb: orbs[0]
   });
 
   const getBonus = (stat) => {
@@ -72,8 +71,13 @@ const MainView = () => {
     speed: speedBonus + baseBonuses.speed
   };
 
+  const equipGear = (slot, type, i) => {
+   setEquippedGear({...equippedGear, [slot]: [type][i]})
+  };
+
+
   const equipWeapon = (i) => {
-    setEquippedGear({...equippedGear, weapon: weapons[i]});
+    setEquippedGear({...equippedGear, weapon: weapon[i]});
   };
   const equipArmor = (i) => {
     setEquippedGear({...equippedGear, armor: armor[i]});
@@ -109,7 +113,7 @@ const MainView = () => {
         <div className='equipment-column'>
           <Equipment title='Weapon' equipment={equippedGear.weapon}
                      equipGear={equipWeapon}
-                     gear={weapons}/>
+                     gear={weapon}/>
           <Equipment title='Armor' equipment={equippedGear.armor}
                      equipGear={equipArmor}
                      gear={armor}/>
