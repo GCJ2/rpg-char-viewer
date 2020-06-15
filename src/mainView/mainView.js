@@ -3,9 +3,33 @@ import './mainView.scss'
 import Stats from "../components/Stats/Stats";
 import Equipment from "../components/equipment/Equipment";
 import {armor, boots, capes, headGear, orbs, weapon} from '../gear';
+import axios from 'axios'
 import Portrait from "../components/Portrait/Portrait";
 
+
 const MainView = () => {
+
+  const [weaponsAPI, setWeaponsAPI] = useState([]);
+  const [hgAPI, sethgAPI] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/weapons')
+      .then((res) => {
+        console.log(res.data);
+        setWeaponsAPI(res.data);
+      })
+      .catch(console.error)
+  }, []);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/headgear')
+      .then((res) => {
+        console.log(res.data);
+        sethgAPI(res.data);
+      })
+      .catch(console.error)
+  }, []);
+
 
   const characterBaseStats = {
     health: 400,
@@ -77,7 +101,7 @@ const MainView = () => {
 
 
   const equipWeapon = (i) => {
-    setEquippedGear({...equippedGear, weapon: weapon[i]});
+    setEquippedGear({...equippedGear, weapon: weaponsAPI[i]});
   };
   const equipArmor = (i) => {
     setEquippedGear({...equippedGear, armor: armor[i]});
@@ -86,7 +110,7 @@ const MainView = () => {
     setEquippedGear({...equippedGear, boots: boots[i]});
   };
   const equipHeadGear = (i) => {
-    setEquippedGear({...equippedGear, headGear: headGear[i]});
+    setEquippedGear({...equippedGear, headGear: hgAPI[i]});
   };
   const equipCape = (i) => {
     setEquippedGear({...equippedGear, cape: capes[i]});
@@ -113,7 +137,7 @@ const MainView = () => {
         <div className='equipment-column'>
           <Equipment title='Weapon' equipment={equippedGear.weapon}
                      equipGear={equipWeapon}
-                     gear={weapon}/>
+                     gear={weaponsAPI}/>
           <Equipment title='Armor' equipment={equippedGear.armor}
                      equipGear={equipArmor}
                      gear={armor}/>
@@ -131,7 +155,7 @@ const MainView = () => {
         <div className='equipment-column'>
           <Equipment title='Headgear' equipment={equippedGear.headGear}
                      equipGear={equipHeadGear}
-                     gear={headGear}/>
+                     gear={hgAPI}/>
           <Equipment title='Cape' equipment={equippedGear.cape}
                      equipGear={equipCape}
                      gear={capes}/>
