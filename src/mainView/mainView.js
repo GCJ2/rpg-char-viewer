@@ -7,28 +7,30 @@ import axios from 'axios'
 import Portrait from "../components/Portrait/Portrait";
 
 
-const MainView = () => {
+const MainView = ({weapons, headgear}) => {
+  const weaponsAPI = weapons;
+  const hgAPI = headgear;
 
-  const [weaponsAPI, setWeaponsAPI] = useState([]);
-  const [hgAPI, sethgAPI] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/weapons')
-      .then((res) => {
-        console.log(res.data);
-        setWeaponsAPI(res.data);
-      })
-      .catch(console.error)
-  }, []);
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/headgear')
-      .then((res) => {
-        console.log(res.data);
-        sethgAPI(res.data);
-      })
-      .catch(console.error)
-  }, []);
+  // const [weaponsAPI, setWeaponsAPI] = useState([]);
+  // const [hgAPI, sethgAPI] = useState([]);
+  //
+  // useEffect(() => {
+  //   axios.get('http://localhost:5000/api/weapons')
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       setWeaponsAPI(res.data);
+  //     })
+  //     .catch(console.error)
+  // }, []);
+  //
+  // useEffect(() => {
+  //   axios.get('http://localhost:5000/api/headgear')
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       sethgAPI(res.data);
+  //     })
+  //     .catch(console.error)
+  // }, []);
 
 
   const characterBaseStats = {
@@ -50,9 +52,9 @@ const MainView = () => {
   });
 
   const getBonus = (stat) => {
-    return(
-    equippedGear.weapon[stat] + equippedGear.armor[stat] + equippedGear.boots[stat] +
-    equippedGear.headGear[stat] + equippedGear.cape[stat] + equippedGear.orb[stat]
+    return (
+      equippedGear.weapon[stat] + equippedGear.armor[stat] + equippedGear.boots[stat] +
+      equippedGear.headGear[stat] + equippedGear.cape[stat] + equippedGear.orb[stat]
     );
   };
 
@@ -96,7 +98,7 @@ const MainView = () => {
   };
 
   const equipGear = (slot, type, i) => {
-   setEquippedGear({...equippedGear, [slot]: [type][i]})
+    setEquippedGear({...equippedGear, [slot]: [type][i]})
   };
 
 
