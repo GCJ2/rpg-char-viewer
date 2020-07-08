@@ -129,11 +129,16 @@ const MainView = ({weapons, headgear}) => {
 
   const characterName = 'Dunkirk';
   const currentClass = 'Defiler';
+  const character = {
+    name: 'Dunkirk',
+    class: 'Defiler',
+    level: 3
+  };
 
   return (
     <div className='page-view'>
       <div className='character-name'>
-        <p>{characterName} the {currentClass}</p>
+        <p>{character.name} the {character.class} (Level {character.level})</p>
       </div>
       <div className='character-view'>
         <div className='equipment-column'>

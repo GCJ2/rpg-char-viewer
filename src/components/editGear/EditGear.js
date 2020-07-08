@@ -3,9 +3,6 @@ import axios from 'axios'
 import './EditGear.scss'
 
 const EditGear = ({weapons, headgear}) => {
-  // const [isEditing, setIsEditing] = useState(false);
-  const [selectedGear, setSelectedGear] = useState(true);
-
 
   const deleteGear = (gear, id) => {
     const url = `http://localhost:5000/api/${gear.type}/${gear.id}`;
@@ -14,10 +11,9 @@ const EditGear = ({weapons, headgear}) => {
         console.log(res.data.message)
       })
       .catch(console.error);
-    setSelectedGear(!selectedGear)
   };
 
-  console.log(selectedGear);
+
 
   return (
     <div>
